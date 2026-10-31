@@ -1422,10 +1422,10 @@ html[data-theme="light"] .card__cover { background: #16302a !important; }
 }
 /* ---------- Приём 5: тёмный покой → цвет при hover ---------- */
 .card__cover--theme {
-  background: #0c1512 !important;
-  background-image: none !important;
+  background: #14231d !important;
+  background-image: radial-gradient(ellipse 120% 100% at 50% 40%, rgba(46,230,176,0.07) 0%, transparent 60%) !important;
   animation: none !important;
-  transition: background 0.55s var(--ease);
+  transition: background 0.45s var(--ease), background-image 0.45s var(--ease);
 }
 .card:hover .card__cover--theme {
   background: #050b08 !important;
