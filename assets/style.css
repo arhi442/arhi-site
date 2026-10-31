@@ -1382,8 +1382,13 @@ html[data-theme="light"] .card__cover { background: #16302a !important; }
   white-space: nowrap;
 }
 .card__legend s {
-  color: rgba(255,255,255,0.5);
-  text-decoration: line-through;
+  color: rgba(255,255,255,0.45);
+  text-decoration: none;
+}
+.card__legend i {
+  font-style: normal;
+  color: rgba(255,255,255,0.35);
+  margin: 0 1px;
 }
 .card__legend b {
   color: #2ee6b0;
