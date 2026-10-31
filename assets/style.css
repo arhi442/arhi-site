@@ -1138,7 +1138,7 @@ html[data-theme="light"] .card__cover--violet{ background: linear-gradient(135de
 html[data-theme="light"] .card__cover--graphite{ background: linear-gradient(135deg, #3a4656, #55677e 55%, #8aa0b8); }
 
 /* hover: карточка приподнимается, обложка оживает */
-.card:hover .card__cover { transform: scale(1.04); filter: brightness(1.08); }
+.card:hover .card__cover { transform: scale(1.015); }
 .card:hover .card__num { transform: translateY(-2px) scale(1.04); }
 .card .card-year {
   position: absolute;
@@ -1427,18 +1427,10 @@ html[data-theme="light"] .card__cover { background: #16302a !important; }
   animation: none !important;
   transition: background 0.55s var(--ease);
 }
-.card:hover .card__cover--theme--teal     { background:
-    radial-gradient(ellipse 130% 100% at 50% 50%, rgba(6,14,11,0.88) 0%, rgba(6,14,11,0.35) 55%, transparent 75%),
-    linear-gradient(135deg, #0c4a3b, #0f6f58 60%, #16917a) !important; }
-.card:hover .card__cover--theme--blue     { background:
-    radial-gradient(ellipse 130% 100% at 50% 50%, rgba(6,11,17,0.88) 0%, rgba(6,11,17,0.35) 55%, transparent 75%),
-    linear-gradient(135deg, #16294a, #234a80 60%, #3a6bb0) !important; }
-.card:hover .card__cover--theme--violet   { background:
-    radial-gradient(ellipse 130% 100% at 50% 50%, rgba(9,7,16,0.88) 0%, rgba(9,7,16,0.35) 55%, transparent 75%),
-    linear-gradient(135deg, #33205c, #4a2d84 60%, #6447a3) !important; }
-.card:hover .card__cover--theme--graphite { background:
-    radial-gradient(ellipse 130% 100% at 50% 50%, rgba(8,10,13,0.88) 0%, rgba(8,10,13,0.35) 55%, transparent 75%),
-    linear-gradient(135deg, #1a232c, #2c3a49 60%, #45566a) !important; }
+.card:hover .card__cover--theme {
+  background: #050b08 !important;
+  background-image: radial-gradient(ellipse 120% 100% at 50% 45%, rgba(12,26,21,0.5) 0%, #050b08 70%) !important;
+}
 
 /* макет чуть подсвечивается при hover */
 .card:hover .card__ui { filter: brightness(1.12); }
