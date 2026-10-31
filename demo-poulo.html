@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Демо: анимации в стиле Pouya</title>
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    /* Сжатая копия нашей темы для демо */
+    :root {
+      --bg: #07120f;
+      --bg-elevated: #0c1815;
+      --text: #e7f0ec;
+      --text-muted: #93a8a0;
+      --accent: #2ee6b0;
+      --accent-line: rgba(46, 230, 176, 0.35);
+      --line: rgba(255,255,255,0.08);
+      --font-display: "Manrope", system-ui, sans-serif;
+      --font-body: "Manrope", system-ui, sans-serif;
+      --font-mono: ui-monospace, "Cascadia Code", monospace;
+      /* SPRING-кривая: довод с лёгким пружинным overshoot */
+      --spring: cubic-bezier(0.22, 1.14, 0.36, 1);
+      --ease: cubic-bezier(0.65, 0, 0.35, 1);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    .wrap { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+
+    /* ============ 1. HERO: строки появляются каскадом, blur -> чётко ============ */
+    .hero { padding: 110px 0 70px; }
+    .demo-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent-line);
+      border-radius: 999px;
+      padding: 5px 14px;
+      margin-bottom: 34px;
+      opacity: 0;
+      animation: line-in 0.7s var(--ease) 0.1s forwards;
+    }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 56px;
+      line-height: 1.08;
+      letter-spacing: -0.035em;
+    }
+    .hero h1 .line {
+      display: block;
+      opacity: 0;
+      filter: blur(14px);
+      transform: translateY(26px);
+    }
+    .hero h1 .line:nth-child(1) { animation: line-blur 0.85s var(--spring) 0.25s forwards; }
+    .hero h1 .line:nth-child(2) { animation: line-blur 0.85s var(--spring) 0.38s forwards; }
+    .hero h1 .line:nth-child(3) { animation: line-blur 0.85s var(--spring) 0.51s forwards; color: var(--accent); }
+    @keyframes line-blur {
+      to { opacity: 1; filter: blur(0); transform: translateY(0); }
+    }
+    @keyframes line-in { to { opacity: 1; } }
+    .hero .lead {
+      margin-top: 22px;
+      max-width: 560px;
+      color: var(--text-muted);
+      font-size: 17px;
+      opacity: 0;
+      filter: blur(10px);
+      animation: line-blur 0.8s var(--ease) 0.72s forwards;
+    }
+
+    /* ============ 2. SPRING-карточки ============ */
+    .section { padding: 40px 0 90px; }
+    .section h2 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 26px;
+      letter-spacing: -0.02em;
+      margin-bottom: 26px;
+    }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } }
+
+    .dcard {
+      position: relative;
+      display: block;
+      text-decoration: none;
+      color: var(--text);
+      background: var(--bg-elevated);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      /* spring-довод: наведение с лёгким overshoot */
+      transition: transform 0.55s var(--spring), border-color 0.4s var(--ease), box-shadow 0.5s var(--ease);
+      opacity: 0;
+      transform: translateY(34px) scale(0.98);
+    }
+    /* появление каскадом: JS вешает --i, задержка = 60мс * номер */
+    .dcard.is-in {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      transition:
+        opacity 0.7s var(--ease) calc(var(--i, 0) * 0.06s),
+        transform 0.8s var(--spring) calc(var(--i, 0) * 0.06s),
+        border-color 0.4s var(--ease),
+        box-shadow 0.5s var(--ease);
+    }
+    .dcard:hover {
+      transform: translateY(-7px) scale(1.012);
+      border-color: var(--accent-line);
+      box-shadow: 0 30px 60px -34px rgba(0,0,0,0.85);
+    }
+    .dcard__cover {
+      height: 132px;
+      background: #14231d;
+      display: grid;
+      place-items: center;
+      position: relative;
+      transition: background 0.45s var(--ease);
+    }
+    .dcard:hover .dcard__cover { background: #050b08; }
+    .dcard__num {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 46px;
+      letter-spacing: -0.04em;
+      color: #fff;
+      text-shadow: 0 3px 26px rgba(0,0,0,0.5);
+      transition: transform 0.55s var(--spring);
+    }
+    .dcard:hover .dcard__num { transform: scale(1.05); }
+    .dcard__legend {
+      position: absolute;
+      bottom: 13px;
+      font-family: var(--font-display);
+      font-size: 14.5px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.92);
+    }
+    .dcard__legend b { color: #8df0d0; }
+    .dcard__body { padding: 18px 20px 20px; }
+    .dcard__body h3 { font-size: 17.5px; font-weight: 600; letter-spacing: -0.01em; }
+    .dcard__body p { margin-top: 8px; color: var(--text-muted); font-size: 14.5px; }
+
+    /* ============ 3. Шапка без пилюль: hover-подчёркивание ============ */
+    .topnav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(7,18,15,0.72);
+      border-bottom: 1px solid var(--line);
+    }
+    .topnav .wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 58px;
+    }
+    .topnav__links { display: flex; gap: 26px; list-style: none; }
+    .topnav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14.5px;
+      font-weight: 500;
+      position: relative;
+      padding: 4px 0;
+      transition: color 0.3s var(--ease);
+    }
+    /* активный — просто цвет, без кнопки */
+    .topnav a.is-active { color: var(--text); font-weight: 600; }
+    /* hover: линия выезжает слева */
+    .topnav a::after {
+      content: "";
+      position: absolute;
+      left: 0; bottom: 0;
+      height: 1.5px; width: 100%;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 0.38s var(--spring);
+    }
+    .topnav a:hover::after, .topnav a.is-active::after { transform: scaleX(1); }
+    .topnav a:hover { color: var(--text); }
+
+    .topnav__cta {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #06120e;
+      background: var(--accent);
+      border-radius: 999px;
+      padding: 8px 18px;
+      text-decoration: none;
+      transition: transform 0.4s var(--spring), box-shadow 0.4s var(--ease);
+    }
+    .topnav__cta:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 8px 24px -8px rgba(46,230,176,0.5); }
+
+    /* ============ 4. Секции: blur-раскрытие при скролле ============ */
+    .sec-reveal { opacity: 0; filter: blur(12px); transform: translateY(30px); }
+    .sec-reveal.is-in {
+      opacity: 1; filter: blur(0); transform: none;
+      transition: opacity 0.8s var(--ease), filter 0.8s var(--ease), transform 0.9s var(--spring);
+    }
+
+    footer { border-top: 1px solid var(--line); padding: 26px 0 40px; color: var(--text-muted); font-size: 13.5px; }
+    .note {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-muted);
+      background: rgba(46,230,176,0.05);
+      border: 1px solid var(--accent-line);
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin: 0 0 44px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+      .hero h1 .line, .hero .lead, .demo-badge { opacity: 1; filter: none; transform: none; }
+      .dcard, .sec-reveal { opacity: 1; filter: none; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="topnav">
+    <div class="wrap">
+      <span style="font-family: var(--font-display); font-weight: 700; font-size: 17px;">A<span style="color: var(--accent);">.</span></span>
+      <ul class="topnav__links">
+        <li><a href="#" class="is-active">Главная</a></li>
+        <li><a href="#cases">Кейсы</a></li>
+        <li><a href="#cases">Статьи</a></li>
+        <li><a href="#">Обо мне</a></li>
+      </ul>
+      <a href="#" class="topnav__cta">На связь</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="wrap">
+      <span class="demo-badge">Демо · наведите на карточки · проскролльте</span>
+      <h1>
+        <span class="line">Комплексное ведение</span>
+        <span class="line">аккаунтов Авито.</span>
+        <span class="line">По договору</span>
+      </h1>
+      <p class="lead">
+        Строки заголовка приезжают каскадом с blur-расфокусом.
+        Каждая — со spring-доводом, как у Pouya.
+      </p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <p class="note sec-reveal">
+      Что смотреть: 1) заголовок собрался построчно; 2) карточки — spring-hover
+      (наведите: довод с лёгким пружинным overshoot); 3) эта плашка и секции
+      раскрываются из blur при скролле; 4) шапка — липкая, активный пункт без
+      пилюли, при hover — линия-подчёркивание выезжает слева.
+    </p>
+
+    <section class="section" id="cases">
+      <h2 class="sec-reveal">Кейсы — появление цепочкой по 60 мс</h2>
+      <div class="grid">
+        <a class="dcard" href="#">
+          <div class="dcard__cover">
+            <span class="dcard__num">−55%</span>
+            <span class="dcard__legend">632 ₽ → <b>284 ₽</b></span>
+          </div>
+          <div class="dcard__body">
+            <h3>Заявки с площадки за 284 ₽ в портфеле из 5 аккаунтов</h3>
+            <p>Пересбор ставок, приоритет целевых контактов, отключение объявлений без обращений.</p>
+          </div>
+        </a>
+        <a class="dcard" href="#">
+          <div class="dcard__cover">
+            <span class="dcard__num">−2,4×</span>
+            <span class="dcard__legend">2 150 ₽ → <b>890 ₽</b></span>
+          </div>
+          <div class="dcard__body">
+            <h3>Стоимость заявки за квартал без роста бюджета</h3>
+            <p>Сегменты спроса, объявления под возражения, честный счёт обращений.</p>
+          </div>
+        </a>
+        <a class="dcard" href="#">
+          <div class="dcard__cover">
+            <span class="dcard__num">×5,5</span>
+            <span class="dcard__legend">34 → <b>187</b> обращений</span>
+          </div>
+          <div class="dcard__body">
+            <h3>Целевые обращения за полгода без роста бюджета</h3>
+            <p>Анализ поисковых запросов, 60 шаблонов объявлений, уборка аккаунта.</p>
+          </div>
+        </a>
+        <a class="dcard" href="#">
+          <div class="dcard__cover">
+            <span class="dcard__num">×4,3</span>
+            <span class="dcard__legend">1,1% → <b>4,7%</b></span>
+          </div>
+          <div class="dcard__body">
+            <h3>Конверсия объявлений без роста бюджета</h3>
+            <p>Заголовки на основе маркетинговых исследований, структура прайса.</p>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">Демо-страница пакета анимаций · arhi-media.ru</div>
+  </footer>
+
+  <script>
+    /* IntersectionObserver: каскад карточек + blur-секции */
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var el = en.target;
+        if (el.classList.contains('dcard')) {
+          el.style.setProperty('--i', el.dataset.i || 0);
+        }
+        el.classList.add('is-in');
+        io.unobserve(el);
+      });
+    }, { threshold: 0.18 });
+    document.querySelectorAll('.dcard').forEach(function (c, i) { c.dataset.i = i % 4; io.observe(c); });
+    document.querySelectorAll('.sec-reveal').forEach(function (s) { io.observe(s); });
+  </script>
+</body>
+</html>

@@ -106,7 +106,30 @@ html[data-theme="light"] .post-body code {
   color: #0a5c49;
 }
 
-html[data-theme="light"] .theme-toggle {
+html[data-theme="light"] .nav-cta {
+  display: inline-flex;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: #06120e;
+  background: var(--accent);
+  border-radius: 999px;
+  padding: 7px 16px;
+  text-decoration: none;
+  margin-right: 14px;
+  transition: transform 0.4s var(--spring), box-shadow 0.4s var(--ease);
+  white-space: nowrap;
+}
+.nav-cta:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 22px -8px rgba(46,230,176,0.55);
+  color: #06120e;
+}
+@media (max-width: 760px) {
+  .nav-cta { display: none; }
+}
+
+.theme-toggle {
   color: var(--text-muted);
 }
 html[data-theme="light"] .theme-toggle:hover {
@@ -1449,4 +1472,94 @@ html[data-theme="light"] .card__cover { background: #16302a !important; }
 }
 @media (max-width: 640px) {
   .card__legend { font-size: 10.5px; padding: 3px 8px; }
+}
+
+
+/* ---------- Пакет «Pouya»: hero построчно, spring, каскады ---------- */
+:root { --spring: cubic-bezier(0.22, 1.14, 0.36, 1); }
+
+/* Hero: строки заголовка */
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(34px, 5.6vw, 58px);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+}
+.ht-line {
+  display: block;
+  opacity: 0;
+  filter: blur(14px);
+  transform: translateY(26px);
+}
+.ht-line:nth-child(1) { animation: ht-in 0.85s var(--spring) 0.25s forwards; }
+.ht-line:nth-child(2) { animation: ht-in 0.85s var(--spring) 0.38s forwards; }
+.ht-line:nth-child(3) { animation: ht-in 0.85s var(--spring) 0.51s forwards; }
+.ht-line--accent { color: var(--accent); }
+.ht-line--accent em { font-style: normal; }
+@keyframes ht-in {
+  to { opacity: 1; filter: blur(0); transform: translateY(0); }
+}
+/* остальные hero-элементы: единый каскад с задержкой --hd */
+.hero-in {
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(18px);
+  animation: ht-in 0.8s var(--ease) var(--hd, 0.5s) forwards;
+}
+
+/* Карточки: spring-hover + каскад появления */
+.card {
+  transition:
+    transform 0.55s var(--spring),
+    border-color 0.4s var(--ease),
+    box-shadow 0.5s var(--ease),
+    opacity 0.6s var(--ease);
+}
+.card:hover {
+  transform: translateY(-7px) scale(1.012);
+}
+/* каскад карточек при появлении */
+.reveal.is-visible .card,
+.card.reveal.is-visible {
+  animation: card-cascade 0.7s var(--spring) calc(var(--ci, 0) * 0.06s) backwards;
+}
+@keyframes card-cascade {
+  from { opacity: 0; transform: translateY(34px) scale(0.98); }
+}
+
+/* Шапка: активный без пилюли + подчёркивание */
+.nav-links a.is-active {
+  background: transparent;
+  color: var(--text);
+  font-weight: 600;
+}
+.nav-links a {
+  position: relative;
+}
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 2px;
+  height: 1.5px; width: 100%;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.38s var(--spring);
+  pointer-events: none;
+}
+.nav-links a:hover::after,
+.nav-links a.is-active::after { transform: scaleX(1); }
+
+/* Секции: blur-раскрытие */
+.reveal {
+  transition:
+    opacity 0.7s var(--ease),
+    transform 0.75s var(--ease),
+    filter 0.7s var(--ease);
+}
+.reveal:not(.is-visible) { filter: blur(10px); }
+@media (prefers-reduced-motion: reduce) {
+  .ht-line, .hero-in { animation: none; opacity: 1; filter: none; transform: none; }
+  .card:hover { transform: none; }
 }

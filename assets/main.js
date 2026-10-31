@@ -117,6 +117,23 @@
     })(null);
   }
 
+
+  /* --- Каскад карточек: порядковые задержки --- */
+  (function () {
+    var cards = document.querySelectorAll('.grid--2 .card');
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var el = en.target;
+        var sibs = el.parentElement.querySelectorAll('.card');
+        var idx = Array.prototype.indexOf.call(sibs, el);
+        el.style.setProperty('--ci', idx % 4);
+        io.unobserve(el);
+      });
+    }, { threshold: 0.15 });
+    cards.forEach(function (c) { io.observe(c); });
+  })();
+
   /* --- Год в подвале --- */
   document.querySelectorAll('[data-year]').forEach(function (el) {
     el.textContent = new Date().getFullYear();
