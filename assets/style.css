@@ -1362,3 +1362,71 @@ html[data-theme="light"] .card__cover { background: #16302a !important; }
 @media (prefers-reduced-motion: reduce) {
   .ui-ad, .ui-bar, .ui-row, .ui-donut, .card__ui { animation: none; }
 }
+
+
+/* ---------- Приём 4: легенда «было→стало» ---------- */
+.card__legend {
+  position: absolute;
+  left: 16px;
+  bottom: 12px;
+  z-index: 3;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.92);
+  background: rgba(0,0,0,0.32);
+  backdrop-filter: blur(4px);
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.14);
+  white-space: nowrap;
+}
+.card__legend s {
+  color: rgba(255,255,255,0.5);
+  text-decoration: line-through;
+}
+.card__legend b {
+  color: #2ee6b0;
+  font-weight: 600;
+}
+html[data-theme="light"] .card__legend b { color: #0d7d63; }
+
+/* ---------- Приём 5: тёмный покой → цвет при hover ---------- */
+.card__cover--theme {
+  background: #0c1512 !important;
+  background-image: none !important;
+  animation: none !important;
+  transition: background 0.55s var(--ease);
+}
+.card:hover .card__cover--theme--teal     { background: linear-gradient(135deg, #0e6f57, #17a383 60%, #2ee6b0) !important; }
+.card:hover .card__cover--theme--blue     { background: linear-gradient(135deg, #1a3a6e, #2d5fa8 60%, #5b8def) !important; }
+.card:hover .card__cover--theme--violet   { background: linear-gradient(135deg, #45247a, #6b3fae 60%, #9b6fe8) !important; }
+.card:hover .card__cover--theme--graphite { background: linear-gradient(135deg, #1f2933, #37475a 60%, #5c7290) !important; }
+
+/* макет чуть подсвечивается при hover */
+.card:hover .card__ui { filter: brightness(1.25); }
+
+/* ---------- Приём 6: рамка-экран «окно приложения» ---------- */
+.card__ui::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 18px;
+  background: rgba(255,255,255,0.045);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.card__ui { padding-top: 26px; position: relative; }
+/* три точки-кнопки окна */
+.card__ui::after {
+  content: "";
+  position: absolute;
+  top: 6px; left: 12px;
+  width: 30px; height: 6px;
+  background:
+    radial-gradient(circle 2.6px at 5px 3px, rgba(255,255,255,0.4), transparent 3px),
+    radial-gradient(circle 2.6px at 15px 3px, rgba(255,255,255,0.4), transparent 3px),
+    radial-gradient(circle 2.6px at 25px 3px, rgba(255,255,255,0.4), transparent 3px);
+}
+@media (max-width: 640px) {
+  .card__legend { font-size: 10.5px; padding: 3px 8px; }
+}
