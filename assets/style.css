@@ -1142,36 +1142,37 @@ html[data-theme="light"] .card__cover--graphite{ background: linear-gradient(135
 .card:hover .card__num { transform: translateY(-2px) scale(1.04); }
 .card .card-year {
   position: absolute;
-  top: 12px;
-  right: 14px;
+  top: 11px;
+  right: 16px;
   font-family: var(--font-mono);
-  font-size: 10.5px;
-  color: #0b1512;
-  background: #f2efe9;
-  padding: 3px 9px;
-  border-radius: 999px;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.6);
+  background: transparent;
   z-index: 3;
   font-weight: 600;
 }
 .card__cover .card-tag {
   position: absolute;
-  top: 12px;
-  left: 14px;
+  top: 11px;
+  left: 16px;
   z-index: 3;
-  color: #0b1512;
-  background: #f2efe9;
+  color: rgba(255,255,255,0.78);
+  background: transparent;
   border-color: transparent;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   font-weight: 600;
-  font-size: 10.5px;
-  padding: 3px 9px;
-  max-width: 62%;
+  max-width: 64%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 @media (max-width: 640px) {
   .card__cover { height: 112px; }
-  .card__num { font-size: 34px; }
+  .card__num { font-size: 36px; inset: 0 0 20px 0; }
 }
 
 
@@ -1386,34 +1387,28 @@ html[data-theme="light"] .card__cover { background: #16302a !important; }
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: 12px;
+  bottom: 15px;
   z-index: 3;
-  font-family: var(--font-body);
-  font-size: 12.5px;
+  font-family: var(--font-display);
+  font-size: 14.5px;
   font-weight: 600;
-  letter-spacing: 0.01em;
-  color: #0b1512;
-  background: #f2efe9;
-  padding: 5px 13px;
-  border-radius: 999px;
+  letter-spacing: 0.02em;
+  color: rgba(255,255,255,0.92);
+  text-shadow: 0 2px 14px rgba(0,0,0,0.55);
   white-space: nowrap;
-  max-width: calc(100% - 28px);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  box-shadow: 0 2px 14px rgba(0,0,0,0.3);
 }
 .card__legend s {
-  color: #7a776f;
+  color: rgba(255,255,255,0.55);
   text-decoration: none;
   font-weight: 500;
 }
 .card__legend i {
   font-style: normal;
-  color: #9b988f;
-  margin: 0 2px;
+  color: rgba(255,255,255,0.45);
+  margin: 0 3px;
 }
 .card__legend b {
-  color: #0c7a60;
+  color: #8df0d0;
   font-weight: 700;
 }
 .card__legend s {
