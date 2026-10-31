@@ -151,15 +151,6 @@
     revealEls.forEach(function (el) { el.classList.add('is-visible'); });
   }
 
-  /* --- Подсветка карточки под курсором --- */
-  document.querySelectorAll('.card').forEach(function (card) {
-    card.addEventListener('pointermove', function (e) {
-      var r = card.getBoundingClientRect();
-      card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-      card.style.setProperty('--my', (e.clientY - r.top) + 'px');
-    });
-  });
-
   /* --- Кнопка «наверх» --- */
   var toTop = document.querySelector('.to-top');
   if (toTop) {

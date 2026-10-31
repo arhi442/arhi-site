@@ -509,15 +509,7 @@ p { margin: 0 0 1.1em; }
               background 0.35s var(--ease), box-shadow 0.35s var(--ease);
 }
 
-.card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), var(--accent-glow), transparent 60%);
-  opacity: 0;
-  transition: opacity 0.4s var(--ease);
-  pointer-events: none;
-}
+
 
 .card:hover {
   transform: translateY(-4px);
@@ -525,7 +517,6 @@ p { margin: 0 0 1.1em; }
   color: var(--text);
   box-shadow: 0 26px 50px -30px rgba(0, 0, 0, 0.9);
 }
-.card:hover::after { opacity: 1; }
 
 .card-tag {
   font-family: var(--font-mono);
