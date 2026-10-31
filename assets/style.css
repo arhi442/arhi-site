@@ -1025,3 +1025,62 @@ html[data-theme="light"] .card-facts b { color: #141414; }
   .hero-actions .btn { width: 100%; justify-content: center; }
   .to-top { right: 16px; bottom: 16px; }
 }
+
+
+/* ---------- 3D-монограмма в hero (лёгкий акцент, без библиотек) ---------- */
+.hero-3d {
+  position: absolute;
+  right: 4%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 340px;
+  height: 340px;
+  perspective: 900px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  animation: hero3d-fadein 1.2s ease-out 0.4s forwards;
+}
+@keyframes hero3d-fadein { to { opacity: 0.9; } }
+@media (max-width: 980px) {
+  .hero-3d { display: none; }
+}
+.hero-3d__inner {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  /* вращение управляется JS */
+  transition: transform 0.25s ease-out;
+}
+@keyframes hero3d-spin {
+  from { transform: rotateX(14deg) rotateY(0deg); }
+  to   { transform: rotateX(14deg) rotateY(360deg); }
+}
+.hero-3d__layer {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--accent-line);
+  border-radius: 38px;
+  background: linear-gradient(140deg, rgba(46, 230, 176, 0.045), transparent 65%);
+  box-shadow: inset 0 0 60px rgba(46, 230, 176, 0.03);
+}
+.hero-3d__letter {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 190px;
+  line-height: 1;
+  letter-spacing: -0.06em;
+  color: var(--accent);
+  opacity: 0.16;
+  user-select: none;
+}
+/* слои: чем дальше, тем меньше и прозрачнее */
+.hero-3d__layer:nth-child(1) { transform: translateZ(0px); }
+.hero-3d__layer:nth-child(2) { transform: translateZ(46px) scale(0.86); opacity: 0.6; }
+.hero-3d__layer:nth-child(3) { transform: translateZ(92px) scale(0.72); opacity: 0.3; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-3d__inner { animation: none; }
+  .hero-3d { opacity: 0.4; }
+}

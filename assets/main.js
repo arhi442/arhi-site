@@ -91,6 +91,32 @@
     if (active) { applyFilter(active.getAttribute('data-filter')); }
   }
 
+
+  /* --- 3D-монограмма: параллакс на мышь --- */
+  var hero3d = document.getElementById('hero3d');
+  if (hero3d && window.matchMedia('(pointer: fine)').matches) {
+    var rx = 14, ry = 0, targetRx = 14, targetRy = 0;
+    var baseSpin = 0, lastT = 0;
+    document.addEventListener('mousemove', function (e) {
+      var nx = (e.clientX / window.innerWidth) - 0.5;
+      var ny = (e.clientY / window.innerHeight) - 0.5;
+      targetRx = 14 - ny * 10;
+      targetRy = nx * 14;
+    }, { passive: true });
+    var prev = null;
+    (function tick(ts) {
+      if (prev !== null) {
+        var dt = Math.min(64, ts - prev);
+        baseSpin += dt * 0.0138; /* ~26 сек/оборот */
+        rx += (targetRx - rx) * 0.08;
+        ry += (targetRy - ry) * 0.08;
+        hero3d.style.transform = 'rotateX(' + rx.toFixed(2) + 'deg) rotateY(' + (ry + (baseSpin % 360)).toFixed(2) + 'deg)';
+      }
+      prev = ts;
+      requestAnimationFrame(tick);
+    })(null);
+  }
+
   /* --- Год в подвале --- */
   document.querySelectorAll('[data-year]').forEach(function (el) {
     el.textContent = new Date().getFullYear();
