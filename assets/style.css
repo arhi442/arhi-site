@@ -1403,13 +1403,13 @@ html[data-theme="light"] .card__legend b { color: #0d7d63; }
   animation: none !important;
   transition: background 0.55s var(--ease);
 }
-.card:hover .card__cover--theme--teal     { background: linear-gradient(135deg, #0e6f57, #17a383 60%, #2ee6b0) !important; }
-.card:hover .card__cover--theme--blue     { background: linear-gradient(135deg, #1a3a6e, #2d5fa8 60%, #5b8def) !important; }
-.card:hover .card__cover--theme--violet   { background: linear-gradient(135deg, #45247a, #6b3fae 60%, #9b6fe8) !important; }
-.card:hover .card__cover--theme--graphite { background: linear-gradient(135deg, #1f2933, #37475a 60%, #5c7290) !important; }
+.card:hover .card__cover--theme--teal     { background: linear-gradient(135deg, #0c4a3b, #0f6f58 60%, #16917a) !important; }
+.card:hover .card__cover--theme--blue     { background: linear-gradient(135deg, #16294a, #234a80 60%, #3a6bb0) !important; }
+.card:hover .card__cover--theme--violet   { background: linear-gradient(135deg, #33205c, #4a2d84 60%, #6447a3) !important; }
+.card:hover .card__cover--theme--graphite { background: linear-gradient(135deg, #1a232c, #2c3a49 60%, #45566a) !important; }
 
 /* макет чуть подсвечивается при hover */
-.card:hover .card__ui { filter: brightness(1.25); }
+.card:hover .card__ui { filter: brightness(1.12); }
 
 /* ---------- Приём 6: рамка-экран «окно приложения» ---------- */
 .card__ui::before {
