@@ -121,8 +121,9 @@ html[data-theme="light"] .nav-cta {
   white-space: nowrap;
 }
 .nav-cta:hover {
-  transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 8px 22px -8px rgba(46,230,176,0.55);
+  transform: none;
+  box-shadow: 0 6px 18px -10px rgba(46,230,176,0.5);
+  filter: brightness(1.06);
   color: #06120e;
 }
 @media (max-width: 760px) {
