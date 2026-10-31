@@ -106,7 +106,7 @@ html[data-theme="light"] .post-body code {
   color: #0a5c49;
 }
 
-html[data-theme="light"] .nav-cta {
+.nav-cta {
   display: inline-flex;
   align-items: center;
   font-size: 13px;
@@ -117,8 +117,20 @@ html[data-theme="light"] .nav-cta {
   padding: 7px 16px;
   text-decoration: none;
   margin-right: 14px;
-  transition: transform 0.4s var(--spring), box-shadow 0.4s var(--ease);
+  transition: box-shadow 0.35s var(--ease), filter 0.35s var(--ease);
   white-space: nowrap;
+}
+.nav-cta:hover {
+  transform: none;
+  box-shadow: 0 6px 18px -10px rgba(46,230,176,0.5);
+  filter: brightness(1.08);
+  color: #06120e;
+  background: var(--accent);
+}
+
+html[data-theme="light"] .nav-cta {
+  color: #06120e;
+  background: var(--accent);
 }
 .nav-cta:hover {
   transform: none;
