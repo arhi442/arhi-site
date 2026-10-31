@@ -111,26 +111,27 @@ html[data-theme="light"] .post-body code {
   align-items: center;
   font-size: 13px;
   font-weight: 600;
-  color: #06120e;
-  background: var(--accent);
+  color: var(--accent);
+  background: transparent;
+  border: 1px solid var(--accent-line);
   border-radius: 999px;
-  padding: 7px 16px;
+  padding: 6px 15px;
   text-decoration: none;
-  margin-right: 14px;
-  transition: box-shadow 0.35s var(--ease), filter 0.35s var(--ease);
+  margin-right: 8px;
+  transition: box-shadow 0.3s var(--ease), background 0.3s var(--ease), color 0.3s var(--ease);
   white-space: nowrap;
 }
 .nav-cta:hover {
-  transform: none;
-  box-shadow: 0 6px 18px -10px rgba(46,230,176,0.5);
-  filter: brightness(1.08);
-  color: #06120e;
-  background: var(--accent);
+  box-shadow: none;
+  color: var(--accent);
+  background: var(--accent-glow);
+  border-color: var(--accent-line);
 }
 
 html[data-theme="light"] .nav-cta {
-  color: #06120e;
-  background: var(--accent);
+  color: var(--accent);
+  background: transparent;
+  border: 1px solid var(--accent-line);
 }
 .nav-cta:hover {
   transform: none;
@@ -151,7 +152,7 @@ html[data-theme="light"] .nav-cta {
   border-radius: 50%;
   border: 1px solid var(--line);
   color: var(--text-muted);
-  margin-right: 8px;
+  margin-right: 6px;
   transition: color 0.3s var(--ease), border-color 0.3s var(--ease), background 0.3s var(--ease);
 }
 .nav-mail:hover {
@@ -296,6 +297,13 @@ a:hover { color: #6ff5cc; }
   -webkit-backdrop-filter: blur(14px);
   background: rgba(7, 18, 15, 0.72);
   border-bottom: 1px solid var(--line-soft);
+}
+
+.nav-side {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
 }
 
 .nav {
