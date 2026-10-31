@@ -1137,21 +1137,26 @@ html[data-theme="light"] .card__cover--graphite{ background: linear-gradient(135
 .card:hover .card__num { transform: translateY(-2px) scale(1.04); }
 .card .card-year {
   position: absolute;
-  top: 14px;
-  right: 16px;
+  top: 12px;
+  right: 14px;
   font-family: var(--font-mono);
-  font-size: 11.5px;
-  color: rgba(255,255,255,0.95);
-  z-index: 2;
+  font-size: 11px;
+  color: #0b1512;
+  background: #f2efe9;
+  padding: 3px 10px;
+  border-radius: 999px;
+  z-index: 3;
+  font-weight: 600;
 }
 .card__cover .card-tag {
   position: absolute;
-  bottom: 40px;
-  left: 16px;
+  bottom: 12px;
+  left: 14px;
   z-index: 3;
-  color: #ffffff;
-  border-color: rgba(255,255,255,0.35);
-  background: rgba(0,0,0,0.12);
+  color: #0b1512;
+  background: #f2efe9;
+  border-color: transparent;
+  font-weight: 600;
 }
 @media (max-width: 640px) {
   .card__cover { height: 96px; }
@@ -1367,34 +1372,35 @@ html[data-theme="light"] .card__cover { background: #16302a !important; }
 /* ---------- Приём 4: легенда «было→стало» ---------- */
 .card__legend {
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 11px;
   z-index: 3;
   font-family: var(--font-body);
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.01em;
-  text-align: center;
-  padding: 8px 10px 10px;
-  color: #ffffff;
+  color: #0b1512;
+  background: #f2efe9;
+  padding: 6px 14px;
+  border-radius: 999px;
   white-space: nowrap;
-  background: linear-gradient(180deg, transparent, rgba(5,10,8,0.78) 60%);
+  box-shadow: 0 2px 14px rgba(0,0,0,0.35);
 }
 .card__legend s {
-  color: rgba(255,255,255,0.75);
+  color: #7a776f;
   text-decoration: none;
+  font-weight: 500;
 }
 .card__legend i {
   font-style: normal;
-  color: rgba(255,255,255,0.55);
+  color: #9b988f;
   margin: 0 2px;
 }
 .card__legend b {
-  color: #8df0d0;
+  color: #0c7a60;
   font-weight: 700;
 }
-html[data-theme="light"] .card__legend b { color: #b8f5e2; }
 .card__legend s {
   color: rgba(255,255,255,0.45);
   text-decoration: none;
