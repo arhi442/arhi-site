@@ -1093,7 +1093,7 @@ html[data-theme="light"] .card-facts b { color: #141414; }
 }
 .card__cover {
   position: relative;
-  height: 120px;
+  height: 148px;
   margin: -1px -1px 18px;
   border-radius: var(--radius) var(--radius) 0 0;
   display: flex;
@@ -1111,9 +1111,14 @@ html[data-theme="light"] .card-facts b { color: #141414; }
     radial-gradient(circle at 75% 85%, rgba(0,0,0,0.28), transparent 55%);
 }
 .card__num {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 44px;
+  font-size: 46px;
   letter-spacing: -0.04em;
   color: #fff;
   text-shadow: 0 3px 30px rgba(0,0,0,0.55), 0 1px 3px rgba(0,0,0,0.6);
@@ -1140,26 +1145,32 @@ html[data-theme="light"] .card__cover--graphite{ background: linear-gradient(135
   top: 12px;
   right: 14px;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 10.5px;
   color: #0b1512;
   background: #f2efe9;
-  padding: 3px 10px;
+  padding: 3px 9px;
   border-radius: 999px;
   z-index: 3;
   font-weight: 600;
 }
 .card__cover .card-tag {
   position: absolute;
-  bottom: 12px;
+  top: 12px;
   left: 14px;
   z-index: 3;
   color: #0b1512;
   background: #f2efe9;
   border-color: transparent;
   font-weight: 600;
+  font-size: 10.5px;
+  padding: 3px 9px;
+  max-width: 62%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 @media (max-width: 640px) {
-  .card__cover { height: 96px; }
+  .card__cover { height: 112px; }
   .card__num { font-size: 34px; }
 }
 
@@ -1276,8 +1287,9 @@ html[data-theme="light"] .card__cover { background: #16302a !important; }
 .ui-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
+  gap: 7px;
   flex: 1;
+  padding-bottom: 46px;
 }
 .ui-ad {
   border-radius: 8px;
@@ -1374,18 +1386,21 @@ html[data-theme="light"] .card__cover { background: #16302a !important; }
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: 11px;
+  bottom: 12px;
   z-index: 3;
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 600;
   letter-spacing: 0.01em;
   color: #0b1512;
   background: #f2efe9;
-  padding: 6px 14px;
+  padding: 5px 13px;
   border-radius: 999px;
   white-space: nowrap;
-  box-shadow: 0 2px 14px rgba(0,0,0,0.35);
+  max-width: calc(100% - 28px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.3);
 }
 .card__legend s {
   color: #7a776f;
@@ -1434,7 +1449,7 @@ html[data-theme="light"] .card__cover { background: #16302a !important; }
   background: rgba(255,255,255,0.045);
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
-.card__ui { padding-top: 26px; position: relative; }
+.card__ui { padding-top: 30px; opacity: 0.55; }
 /* три точки-кнопки окна */
 .card__ui::after {
   content: "";
