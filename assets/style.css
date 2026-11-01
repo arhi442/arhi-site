@@ -327,6 +327,15 @@ a:hover { color: #6ff5cc; }
   gap: 24px;
 }
 
+.brand-logo {
+  width: 30px;
+  height: 30px;
+  display: block;
+  border-radius: 8px;
+  transition: transform 0.45s var(--spring);
+}
+.brand:hover .brand-logo { transform: scale(1.1) rotate(-4deg); }
+
 .brand {
   display: flex;
   align-items: center;
