@@ -214,6 +214,7 @@
     var sections = [['#cases', '/#cases'], ['#articles', '/#articles']];
     window.addEventListener('scroll', function () {
       if (location.pathname !== '/') return;
+      if (location.hash === '#cases' || location.hash === '#articles') return; // hash главнее
       var cur = '/';
       sections.forEach(function (s) {
         var el = document.querySelector(s[0]);
