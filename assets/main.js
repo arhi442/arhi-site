@@ -14,14 +14,13 @@
   var initial = saved || 'dark';
   root.setAttribute('data-theme', initial);
 
-  document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.theme-toggle').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-        root.setAttribute('data-theme', next);
-        try { localStorage.setItem('arhi-theme', next); } catch (e) {}
-      });
-    });
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('.theme-toggle');
+    if (!btn) return;
+    var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    document.documentElement.style.background = (next === 'light') ? '#f7f5f1' : '#07120f';
+    try { localStorage.setItem('arhi-theme', next); } catch (e) {}
   });
 
   /* --- Лёгкий лоадер со счётчиком (один раз за сессию) --- */
@@ -133,6 +132,61 @@
     }, { threshold: 0.15 });
     cards.forEach(function (c) { io.observe(c); });
   })();
+
+
+  /* --- SPA-навигация: переходы без перезагрузки (нет белых вспышек) --- */
+  (function () {
+    var SPANav = function (url, push) {
+      fetch(url).then(function (r) { return r.text(); }).then(function (html) {
+        var doc = new DOMParser().parseFromString(html, 'text/html');
+        // подменяем контент: header, main, footer
+        ['header.site-header', 'main', 'footer.site-footer', 'button.to-top'].forEach(function (sel) {
+          var old = document.querySelector(sel);
+          var neu = doc.querySelector(sel);
+          if (old && neu) old.replaceWith(neu.cloneNode(true));
+          else if (!old && neu) document.body.appendChild(neu.cloneNode(true));
+        });
+        // head: title, meta description
+        document.title = doc.title;
+        var md = doc.querySelector('meta[name="description"]');
+        var mdOld = document.querySelector('meta[name="description"]');
+        if (md && mdOld) mdOld.setAttribute('content', md.getAttribute('content'));
+        if (push !== false) history.pushState({}, '', url);
+        // скролл наверх
+        window.scrollTo(0, 0);
+        // ре-инициализация после подмены
+        document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('is-visible'); });
+        var loader = document.querySelector('.page-loader');
+        if (loader) loader.classList.add('is-done');
+        // перемонтировать to-top
+        var tt = document.querySelector('.to-top');
+        if (tt && !tt._init) {
+          tt._init = true;
+          tt.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+        }
+        document.dispatchEvent(new Event('spa:navigated'));
+      }).catch(function () { location.href = url; });
+    };
+
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest('a');
+      if (!a) return;
+      var href = a.getAttribute('href');
+      if (!href || a.target === '_blank' || a.hasAttribute('download')) return;
+      if (href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('http')) return;
+      // только внутренние html-переходы, не якоря
+      if (href.startsWith('#') || href.includes('#')) return;
+      // главную грузим полноценно (3D, фильтры, каскады):
+      if (href === '/' || href.endsWith('/index.html')) return;
+      e.preventDefault();
+      SPANav(href, true);
+    });
+
+    window.addEventListener('popstate', function () {
+      SPANav(location.pathname, false);
+    });
+  })();
+
 
   /* --- Год в подвале --- */
   document.querySelectorAll('[data-year]').forEach(function (el) {
