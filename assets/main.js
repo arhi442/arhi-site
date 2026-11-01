@@ -189,6 +189,43 @@
   })();
 
 
+
+  /* --- Подсветка активного пункта меню (понимает якоря кейсов/статей) --- */
+  (function () {
+    function setActive(name) {
+      document.querySelectorAll('.nav-links a').forEach(function (a) {
+        var isIt = a.getAttribute('href') === name;
+        a.classList.toggle('is-active', isIt);
+      });
+    }
+    function byUrl() {
+      var h = location.hash;
+      if (h === '#cases') return '/#cases';
+      if (h === '#articles') return '/#articles';
+      var p = location.pathname;
+      if (p.indexOf('/about') === 0) return '/about';
+      if (p.indexOf('/how-it-works') === 0) return '/how-it-works';
+      return '/';
+    }
+    setActive(byUrl());
+    window.addEventListener('hashchange', function () { setActive(byUrl()); });
+    // при скролле: какая секция в центре экрана
+    var sections = [['#cases', '/#cases'], ['#articles', '/#articles']];
+    window.addEventListener('scroll', function () {
+      if (location.pathname !== '/') return;
+      var cur = '/';
+      sections.forEach(function (s) {
+        var el = document.querySelector(s[0]);
+        if (el) {
+          var r = el.getBoundingClientRect();
+          if (r.top < window.innerHeight * 0.4 && r.bottom > window.innerHeight * 0.4) cur = s[1];
+        }
+      });
+      setActive(cur);
+    }, { passive: true });
+  })();
+
+
   /* --- Год в подвале --- */
   document.querySelectorAll('[data-year]').forEach(function (el) {
     el.textContent = new Date().getFullYear();
