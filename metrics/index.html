@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta name="color-scheme" content="dark">
-  <style>html{background:#07120f}</style>
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,6 +25,12 @@
     "publisher": {"@type": "Person", "name": "Михаил"},
     "mainEntityOfPage": "https://arhi-media.ru/article-metrics.html"
   }
+  </script>
+  <script>
+  (function(){try{var t=localStorage.getItem('arhi-theme')||'dark';
+  document.documentElement.setAttribute('data-theme',t);
+  document.documentElement.style.background=(t==='light')?'#f7f5f1':'#07120f';
+  document.documentElement.style.colorScheme=t;}catch(e){}})();
   </script>
 </head>
 <body>
