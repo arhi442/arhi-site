@@ -285,6 +285,12 @@ a:hover { color: #6ff5cc; }
   width: 32px;
   height: 32px;
   border-radius: 50%;
+  filter: grayscale(1) opacity(0.55);
+  transition: filter 0.35s var(--ease), transform 0.35s var(--spring);
+}
+.nav-ico--brand:hover {
+  filter: grayscale(0) opacity(1);
+  transform: scale(1.1);
 }
 .nav-ico--brand svg {
   width: 28px;
@@ -298,7 +304,6 @@ a:hover { color: #6ff5cc; }
   border-radius: 50%;
   object-fit: cover;
 }
-.nav-ico--brand:hover { transform: scale(1.1); background: transparent; border: none; }
 @media (max-width: 860px) {
   .nav-ico--brand { width: 28px; height: 28px; }
   .nav-ico--brand svg, .nav-ico--brand img { width: 24px; height: 24px; }
