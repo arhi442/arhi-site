@@ -303,8 +303,8 @@ a:hover { color: #6ff5cc; }
   .nav-ico--brand { width: 28px; height: 28px; }
   .nav-ico--brand svg, .nav-ico--brand img { width: 24px; height: 24px; }
 }
-.nav-ico--max img { width: 21px; height: 21px; display: block; }
-.nav-ico--max:hover { border-color: var(--accent-line); background: var(--accent-glow); transform: translateY(-1px); color: var(--text-muted); }
+.nav-ico--max img { width: 28px; height: 28px; display: block; border-radius: 50%; object-fit: cover; }
+.nav-ico--max:hover { transform: scale(1.1); border: none; background: transparent; }
 @media (max-width: 860px) { .nav-ico { width: 36px; height: 36px; } .nav-ico svg { width: 17px; height: 17px; } }
 
 .nav-side {
