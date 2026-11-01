@@ -260,6 +260,24 @@ a:hover { color: #6ff5cc; }
   border-bottom: 1px solid var(--line-soft);
 }
 
+.nav-ico--brand {
+  border: none;
+  background: transparent;
+  width: 34px;
+  height: 34px;
+}
+.nav-ico--brand svg {
+  width: 27px;
+  height: 27px;
+  display: block;
+  border-radius: 6px;
+}
+.nav-ico--brand:hover { transform: translateY(-1px) scale(1.08); background: transparent; border: none; }
+@media (max-width: 860px) {
+  .nav-ico--brand { width: 30px; height: 30px; }
+  .nav-ico--brand svg { width: 24px; height: 24px; }
+}
+
 .nav-ico {
   display: inline-flex;
   align-items: center;
