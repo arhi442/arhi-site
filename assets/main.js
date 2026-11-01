@@ -209,6 +209,7 @@
     }
     setActive(byUrl());
     window.addEventListener('hashchange', function () { setActive(byUrl()); });
+    document.addEventListener('spa:navigated', function () { setActive(byUrl()); });
     // при скролле: какая секция в центре экрана
     var sections = [['#cases', '/#cases'], ['#articles', '/#articles']];
     window.addEventListener('scroll', function () {
