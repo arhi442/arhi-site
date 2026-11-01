@@ -138,6 +138,8 @@
   (function () {
     var SPANav = function (url, push) {
       var furl = url.endsWith('/') ? url : url + '/';
+      // плавный уход текущего контента
+      document.body.classList.add('spa-leaving');
       fetch(furl).then(function (r) { return r.text(); }).then(function (html) {
         var doc = new DOMParser().parseFromString(html, 'text/html');
         // подменяем контент: header, main, footer
@@ -155,6 +157,14 @@
         if (push !== false) history.pushState({}, '', url);
         // скролл наверх
         window.scrollTo(0, 0);
+        // плавное появление нового контента
+        document.body.classList.remove('spa-leaving');
+        document.body.classList.add('spa-entering');
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            document.body.classList.remove('spa-entering');
+          });
+        });
         // ре-инициализация после подмены
         document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('is-visible'); });
         var loader = document.querySelector('.page-loader');
