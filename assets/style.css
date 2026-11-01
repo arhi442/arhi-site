@@ -310,7 +310,6 @@ a:hover { color: #6ff5cc; }
 }
 .nav-ico--max img { width: 28px; height: 28px; display: block; border-radius: 50%; object-fit: cover; }
 .nav-ico--max:hover { transform: scale(1.1); border: none; background: transparent; }
-@media (max-width: 860px) { .nav-side { display: none; } }
 
 .nav-side {
   display: flex;
@@ -318,6 +317,7 @@ a:hover { color: #6ff5cc; }
   gap: 8px;
   flex-shrink: 0;
 }
+@media (max-width: 860px) { .nav-side { display: none; } }
 
 .nav {
   display: flex;
