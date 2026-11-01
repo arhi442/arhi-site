@@ -279,6 +279,8 @@ a:hover { color: #6ff5cc; }
   transform: translateY(-1px);
 }
 .nav-ico svg { width: 19px; height: 19px; display: block; }
+.nav-ico--max img { width: 21px; height: 21px; display: block; }
+.nav-ico--max:hover { border-color: var(--accent-line); background: var(--accent-glow); transform: translateY(-1px); color: var(--text-muted); }
 @media (max-width: 860px) { .nav-ico { width: 36px; height: 36px; } .nav-ico svg { width: 17px; height: 17px; } }
 
 .nav-side {
