@@ -106,27 +106,6 @@ html[data-theme="light"] .post-body code {
   color: #0a5c49;
 }
 
-.nav-cta {
-  display: inline-flex;
-  align-items: center;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--accent);
-  background: transparent;
-  border: 1px solid var(--accent-line);
-  border-radius: 999px;
-  padding: 6px 15px;
-  text-decoration: none;
-  margin-right: 8px;
-  transition: box-shadow 0.3s var(--ease), background 0.3s var(--ease), color 0.3s var(--ease);
-  white-space: nowrap;
-}
-.nav-cta:hover {
-  box-shadow: none;
-  color: var(--accent);
-  background: var(--accent-glow);
-  border-color: var(--accent-line);
-}
 
 html[data-theme="light"] .nav-cta {
   color: var(--accent);
@@ -143,24 +122,6 @@ html[data-theme="light"] .nav-cta {
   .nav-cta { display: none; }
 }
 
-.nav-mail {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  border: 1px solid var(--line);
-  color: var(--text-muted);
-  margin-right: 6px;
-  transition: color 0.3s var(--ease), border-color 0.3s var(--ease), background 0.3s var(--ease);
-}
-.nav-mail:hover {
-  color: var(--accent);
-  border-color: var(--accent-line);
-  background: var(--accent-glow);
-}
-.nav-mail svg { width: 15px; height: 15px; display: block; }
 @media (max-width: 760px) { .nav-mail { display: none; } }
 
 .theme-toggle {
@@ -298,6 +259,27 @@ a:hover { color: #6ff5cc; }
   background: rgba(7, 18, 15, 0.72);
   border-bottom: 1px solid var(--line-soft);
 }
+
+.nav-ico {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  color: var(--text-muted);
+  background: transparent;
+  transition: color 0.3s var(--ease), border-color 0.3s var(--ease), background 0.3s var(--ease), transform 0.35s var(--spring);
+}
+.nav-ico:hover {
+  color: var(--accent);
+  border-color: var(--accent-line);
+  background: var(--accent-glow);
+  transform: translateY(-1px);
+}
+.nav-ico svg { width: 19px; height: 19px; display: block; }
+@media (max-width: 860px) { .nav-ico { width: 36px; height: 36px; } .nav-ico svg { width: 17px; height: 17px; } }
 
 .nav-side {
   display: flex;
