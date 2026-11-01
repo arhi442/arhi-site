@@ -1617,3 +1617,24 @@ html[data-theme="light"] .card__cover { background: #16302a !important; }
   .ht-line, .hero-in { animation: none; opacity: 1; filter: none; transform: none; }
   .card:hover { transform: none; }
 }
+
+
+/* ---------- Липкие заголовки секций ---------- */
+.section-head--sticky {
+  position: sticky;
+  top: 0;
+  z-index: 6;
+  background: rgba(7, 18, 15, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+  margin: -20px -24px 28px;
+  padding: 16px 24px;
+  border-radius: 0;
+}
+html[data-theme="light"] .section-head--sticky {
+  background: rgba(244, 242, 237, 0.85);
+}
+@media (max-width: 720px) {
+  .section-head--sticky { margin: -12px -16px 20px; padding: 12px 16px; }
+}
