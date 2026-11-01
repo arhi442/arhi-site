@@ -137,7 +137,8 @@
   /* --- SPA-навигация: переходы без перезагрузки (нет белых вспышек) --- */
   (function () {
     var SPANav = function (url, push) {
-      fetch(url).then(function (r) { return r.text(); }).then(function (html) {
+      var furl = url.endsWith('/') ? url : url + '/';
+      fetch(furl).then(function (r) { return r.text(); }).then(function (html) {
         var doc = new DOMParser().parseFromString(html, 'text/html');
         // подменяем контент: header, main, footer
         ['header.site-header', 'main', 'footer.site-footer', 'button.to-top'].forEach(function (sel) {
